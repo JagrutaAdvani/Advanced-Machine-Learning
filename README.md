@@ -1,7 +1,19 @@
-Child Mind Institute — Problematic Internet Use
+## **Child Mind Institute — Problematic Internet Use**
 Relating Physical Activity to Problematic Internet Use - https://www.kaggle.com/competitions/child-mind-institute-problematic-internet-use/
 
-* Overview
+We participated in the Kaggle Competition titled “Child Mind Institute–Problematic Internet Use.” This repository contains all of our code used to explore, process, and model the data. The data is not included here because it is too large to upload on GitHub. It is available on the competition website though.
+
+#### File descriptions:
+
+1) DataExploration.ipynb: Notebook that we used to explore all the data. The plots in the EDA section of our blog are from here. The EDA also informed our data processing, so some of that processing is performed here, though it's repeated in our modeling files.
+2) AcitgraphyProcessing.ipynb: This file includes some exploration of the actigraphy data as well as the creation of aggregate activity measures, such as the percentage of time spent sedentary.
+3) Advanced_Actigraphy_Processing.ipynb: This file contains our attempt to utilize the actigraphy data better through autoencoding.
+4) simple_reg_vs_classifier.ipynb: This file contains our first attempt at determining if regression or classification is better.
+5) Advanced_Regression_Vs_Classification.ipynb: This file contains our more advanced attempt at determining if we should use regression or classification. We decided regression was better.
+6) best_model.ipynb: This file contains all the methods we tried for pre-processing and our best model (multi-output regression using CATBoost and threshold optimization). The pre-processing settings can be changed at the top of the notebook. We used these settings to explore the best combination of methods that processed the data best according to cross-validation scores.
+
+
+### Overview
 Can you predict the level of problematic internet usage exhibited by children and adolescents, based on their physical activity? The goal of this competition is to develop a predictive model that analyzes children's physical activity and fitness data to identify early signs of problematic internet use. Identifying these patterns can help trigger interventions to encourage healthier digital habits.
 
 * Start
@@ -10,7 +22,7 @@ Sep 19, 2024
 * Close
 Dec 19, 2024
 
-* Description
+### Description
 In today’s digital age, problematic internet use among children and adolescents is a growing concern. Better understanding this issue is crucial for addressing mental health problems such as depression and anxiety.
 
 Current methods for measuring problematic internet use in children and adolescents are often complex and require professional assessments. This creates access, cultural, and linguistic barriers for many families. Due to these limitations, problematic internet use is often not measured directly, but is instead associated with issues such as depression and anxiety in youth.
@@ -21,10 +33,10 @@ This competition challenges you to develop a predictive model capable of analyzi
 
 Your work will contribute to a healthier, happier future where children are better equipped to navigate the digital landscape responsibly.
 
-* Acknowledgments
+### Acknowledgments
 The data used for this competition was provided by the Healthy Brain Network, a landmark mental health study based in New York City that will help children around the world. In the Healthy Brain Network, families, community leaders, and supporters are partnering with the Child Mind Institute to unlock the secrets of the developing brain. In addition to the generous support provided by the Kaggle team, financial support has been provided by the California Department of Health Care Services (DHCS) as part of the Children and Youth Behavioral Health Initiative (CYBHI).
 
-* Evaluation
+### Evaluation
 Submissions are scored based on the quadratic weighted kappa, which measures the agreement between two outcomes. This metric typically varies from 0 (random agreement) to 1 (complete agreement). In the event that there is less agreement than expected by chance, the metric may go below 0.
 
 To compute the quadratic weighted kappa, we construct three matrices, 𝑂
@@ -56,17 +68,17 @@ From these three matrices, the quadratic weighted kappa is calculated as:
 
 𝜅=1−∑𝑖,𝑗𝑊𝑖,𝑗𝑂𝑖,𝑗∑𝑖,𝑗𝑊𝑖,𝑗𝐸𝑖,𝑗.
 
-* Submission File
+### Submission File
 For each id in the test set, you must predict the corresponding sii (described on the Data page). The file should contain a header and have the following format:
 
-* Dataset Description
+### Dataset Description
 The Healthy Brain Network (HBN) dataset is a clinical sample of about five-thousand 5-22 year-olds who have undergone both clinical and research screenings. The objective of the HBN study is to find biological markers that will improve the diagnosis and treatment of mental health and learning disorders from an objective biological perspective. Two elements of this study are being used for this competition: physical activity data (wrist-worn accelerometer data, fitness assessments and questionnaires) and internet usage behavior data. The goal of this competition is to predict from this data a participant's Severity Impairment Index (sii), a standard measure of problematic internet use.
 
 Note that this is a Code Competition, in which the actual test set is hidden. In this public version, we give some sample data in the correct format to help you author your solutions. The full test set comprises about 3800 instances.
 
 The competition data is compiled into two sources, parquet files containing the accelerometer (actigraphy) series and csv files containing the remaining tabular data. The majority of measures are missing for most participants. In particular, the target sii is missing for a portion of the participants in the training set. You may wish to apply non-supervised learning techniques to this data. The sii value is present for all instances in the test set.
 
-* HBN Instruments
+### HBN Instruments
 The tabular data in train.csv and test.csv comprises measurements from a variety of instruments. The fields within each instrument are described in data_dictionary.csv. These instruments are:
 
 Demographics - Information about age and sex of participants.
@@ -82,7 +94,7 @@ Actigraphy - Objective measure of ecological physical activity through a researc
 Parent-Child Internet Addiction Test - 20-item scale that measures characteristics and behaviors associated with compulsive use of the Internet including compulsivity, escapism, and dependency.
 Note in particular the field PCIAT-PCIAT_Total. The target sii for this competition is derived from this field as described in the data dictionary: 0 for None, 1 for Mild, 2 for Moderate, and 3 for Severe. Additionally, each participant has been assigned a unique identifier id.
 
-* Actigraphy Files and Field Descriptions
+### Actigraphy Files and Field Descriptions
 During their participation in the HBN study, some participants were given an accelerometer to wear for up to 30 days continually while at home and going about their regular daily lives.
 
 series_{train|test}.parquet/id={id} - Series to be used as training data, partitioned by id. Each series is a continuous recording of accelerometer data for a single subject spanning many days.
